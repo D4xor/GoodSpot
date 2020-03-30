@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "791918747770",
+    "firebase_url": "https://goodspot-e3716.firebaseio.com",
+    "project_id": "goodspot-e3716",
+    "storage_bucket": "goodspot-e3716.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:791918747770:android:6b1e214184147e31a15bc3",
+        "android_client_info": {
+          "package_name": "com.example.goodspot"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "791918747770-o4ti65k9otkuojm2mqh46n0174532dr5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.goodspot",
+            "certificate_hash": "2a99b0fe69b2c36d0619b59b228450a505b210f2"
+          }
+        },
+        {
+          "client_id": "791918747770-behauet79lnhjaqqdcpvrk7o8g8r4a45.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA994_s7ddQp1cTrZSajuawvNnhWM7cbx4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "791918747770-behauet79lnhjaqqdcpvrk7o8g8r4a45.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
