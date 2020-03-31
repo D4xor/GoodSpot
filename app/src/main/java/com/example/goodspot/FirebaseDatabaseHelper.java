@@ -14,7 +14,7 @@ import java.util.List;
 public class FirebaseDatabaseHelper {
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
-    private List<Marker> markers = new ArrayList<>();
+    private static List<Marker> markers = new ArrayList<>();
 
     public FirebaseDatabaseHelper() {
         mDatabase = FirebaseDatabase.getInstance();

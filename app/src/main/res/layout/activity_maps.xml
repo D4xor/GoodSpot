@@ -13,7 +13,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="577dp"
         android:layout_weight="1"
         android:orientation="vertical">
 
@@ -21,28 +21,42 @@
             android:id="@+id/map"
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="508dp" />
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical">
-
-        <!--
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-        -->
-        <TextView
-            android:id="@+id/info1"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="97dp"
-            android:text="TextView"
-            android:textSize="36sp" />
+            android:layout_height="78dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/markerList"
+                android:layout_width="wrap_content"
+                android:layout_height="85dp"
+                android:layout_weight="1"
+                android:text="Les spots" />
+
+            <Button
+                android:id="@+id/add"
+                android:layout_width="wrap_content"
+                android:layout_height="85dp"
+                android:layout_weight="1"
+                android:text="ADD" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/back"
+                android:layout_width="match_parent"
+                android:layout_height="78dp"
+                android:text="Back"
+                android:onClick="Exit"
+                />
+        </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>
