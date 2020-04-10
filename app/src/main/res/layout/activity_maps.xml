@@ -4,13 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text="GoodSpot - Doreau Maxime" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="577dp"
@@ -21,19 +14,12 @@
             android:id="@+id/map"
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
-            android:layout_height="508dp" />
+            android:layout_height="542dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="78dp"
+            android:layout_height="87dp"
             android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/markerList"
-                android:layout_width="wrap_content"
-                android:layout_height="85dp"
-                android:layout_weight="1"
-                android:text="Les spots" />
 
             <Button
                 android:id="@+id/add"
@@ -52,10 +38,16 @@
                 android:id="@+id/back"
                 android:layout_width="match_parent"
                 android:layout_height="78dp"
-                android:text="Back"
                 android:onClick="Exit"
-                />
+                android:text="Back" />
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="GoodSpot - Doreau Maxime" />
 
     </LinearLayout>
 

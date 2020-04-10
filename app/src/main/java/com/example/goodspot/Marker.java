@@ -7,16 +7,18 @@ public class Marker {
     private String latitude;
     private String description;
     private String photolink;
+    private String type;
 
     public Marker() {
     }
 
-    public Marker(String name, String longitude, String latitude, String description, String photolink) {
+    public Marker(String name, String longitude, String latitude, String description, String photolink, String type) {
         this.name = name;
         this.longitude = longitude;
         this.latitude = latitude;
         this.description = description;
         this.photolink = photolink;
+        this.type = type;
     }
 
     public String getName() {
@@ -57,5 +59,13 @@ public class Marker {
 
     public void setPhotolink(String photolink) {
         this.photolink = photolink;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }
