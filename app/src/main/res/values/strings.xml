@@ -1,4 +1,14 @@
 <resources>
     <string name="app_name">GoodSpot</string>
     <string name="title_activity_maps">Map</string>
+    <string name="spinnerType">Recherche par type</string>
+    <string name="action_quit">Quitter</string>
+    <string name="action_search">Recherche</string>
+
+
+    <string-array name="type">
+        <item>Tous</item>
+        <item>Chateau</item>
+        <item>Lac</item>
+    </string-array>
 </resources>
