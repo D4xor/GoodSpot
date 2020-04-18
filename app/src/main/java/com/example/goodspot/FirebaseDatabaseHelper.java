@@ -2,6 +2,7 @@ package com.example.goodspot;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,7 +24,8 @@ public class FirebaseDatabaseHelper {
 
     public interface DataStatus{
         void DataIsLoaded(List<Marker> markers, List<String> keys);
-        /*void DataIsInserted();
+        void DataIsInserted();
+        /*
         void DataIsUpdated();
         void DataIsDeleted();*/
     }
@@ -45,6 +47,16 @@ public class FirebaseDatabaseHelper {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
+            }
+        });
+    }
+
+    public void addMarkers(Marker marker, final DataStatus dataStatus){
+        String key = mReference.push().getKey();
+        mReference.child(key).setValue(marker).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                dataStatus.DataIsInserted();
             }
         });
     }

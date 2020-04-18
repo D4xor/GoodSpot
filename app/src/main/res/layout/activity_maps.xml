@@ -8,35 +8,84 @@
         android:id="@+id/toolbar"
         layout="@layout/toolbar" />
 
-    <TextView
-        android:layout_width="140dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:text="Recherche par type"
-        android:textStyle="bold" />
-
     <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="15dp"
-        android:gravity="center">
+        android:padding="5dp"> <!-- to show what the parent is -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center">
+            <TextView
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Recherche par type"
+                android:textStyle="bold" />
 
-        <Spinner
-            android:id="@+id/spinnerType"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:entries="@array/type" />
+        </LinearLayout>
 
-        <ImageButton
-            android:id="@+id/btnType"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@android:drawable/ic_menu_search" />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center">
+            <TextView
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Ajouter un spot"
+                android:textStyle="bold" />
 
-
+        </LinearLayout>
     </LinearLayout>
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"> <!-- to show what the parent is -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <Spinner
+                android:id="@+id/spinnerType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/type" />
+
+            <ImageButton
+                android:id="@+id/btnType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_search" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/addLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_add_location" />
+        </LinearLayout>
+    </LinearLayout>
     <fragment
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"

@@ -8,12 +8,15 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
+import android.app.Fragment;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -36,19 +39,19 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     //Layout
     private GoogleMap mMap;
-    private ImageButton btnType;
+    private ImageButton btnType,btnLocation;
     private Spinner spinnerType;
     private Toolbar mToolbar;
 
     //Location
     Location currentLocation;
+    MarkerOptions myLoc;
     FusedLocationProviderClient fusedLocationProviderClient;
 
     //Markers
@@ -60,8 +63,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         setContentView(R.layout.activity_maps);
 
         btnType = findViewById(R.id.btnType);
+        btnLocation = findViewById(R.id.addLocation);
         spinnerType = findViewById(R.id.spinnerType);
-        mToolbar =findViewById(R.id.toolbar);
+        mToolbar = findViewById(R.id.toolbar);
 
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -79,31 +83,15 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             public void DataIsLoaded(List<Marker> markers, List<String> keys) {
                 MapsActivity.allMarkers = markers;
             }
+            @Override
+            public void DataIsInserted() {
+            }
         });
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
-    }
-
-    //Option Menu de la ToolBar
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-                getMenuInflater().inflate(R.menu.menu, menu);
-        return true;
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            finish();
-            return true;
-            
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -116,7 +104,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             mMap.setMyLocationEnabled(true);
             mMap.getUiSettings().setMyLocationButtonEnabled(true); //Affichage du bouton de localisation de Google Maps
         }
-
         //Fonction utilisée pour formater le snippet du marker
         mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
             @Override
@@ -146,6 +133,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
+        //Selection de la catégorie
         btnType.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -161,6 +149,33 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 getLocation(); //Recentrer sur la localisation après la selection
             }
         });
+
+        //Ajout d'un marker
+        btnLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LatLng newLoc = new LatLng(currentLocation.getLatitude(),currentLocation.getLongitude());
+                myLoc = new MarkerOptions().position(newLoc).title("New").draggable(true);
+                mMap.addMarker(myLoc);
+                getLocation();
+            }
+        });
+    }
+
+    //Option Menu de la ToolBar
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     //Obtenir la localisation de l'appareil
