@@ -10,4 +10,10 @@
         <item>Chateau</item>
         <item>Lac</item>
     </string-array>
+
+    <string-array name="type2">
+        <item>---Choisir type---</item>
+        <item>Chateau</item>
+        <item>Lac</item>
+    </string-array>
 </resources>

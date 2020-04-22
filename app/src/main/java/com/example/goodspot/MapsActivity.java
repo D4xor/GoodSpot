@@ -5,18 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
-import android.app.Fragment;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.location.Location;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.util.Log;
-import android.view.GestureDetector;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -51,7 +48,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     //Location
     Location currentLocation;
-    MarkerOptions myLoc;
     FusedLocationProviderClient fusedLocationProviderClient;
 
     //Markers
@@ -155,9 +151,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void onClick(View v) {
                 LatLng newLoc = new LatLng(currentLocation.getLatitude(),currentLocation.getLongitude());
-                myLoc = new MarkerOptions().position(newLoc).title("New").draggable(true);
-                mMap.addMarker(myLoc);
-                getLocation();
+                Intent i = new Intent(getApplicationContext(),AddMarker.class);
+                i.putExtra("newLoc",newLoc);
+                startActivity(i);
             }
         });
     }
@@ -205,6 +201,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     //Affichage pour un marker donné
     private void displayMarkers(Marker marker){
+        mMap.clear();
         LatLng m1 = new LatLng(Double.parseDouble(marker.getLongitude()),Double.parseDouble(marker.getLatitude()));
         //Affichage de l'icone en fonction de son type
         switch (marker.getType()){
