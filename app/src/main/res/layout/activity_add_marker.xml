@@ -26,6 +26,7 @@
         android:inputType="textPersonName"
         android:textAlignment="center" />
 
+
     <Spinner
         android:id="@+id/spinner2"
         android:layout_width="match_parent"
@@ -39,19 +40,19 @@
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
-        <Button
+        <ImageButton
             android:id="@+id/addit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Ajouter" />
+            android:src="@drawable/ic_add_point" />
 
-        <Button
-            android:id="@+id/button2"
+        <ImageButton
+            android:id="@+id/backToIt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Button" />
+            android:src="@drawable/ic_back" />
     </LinearLayout>
 
 </LinearLayout>

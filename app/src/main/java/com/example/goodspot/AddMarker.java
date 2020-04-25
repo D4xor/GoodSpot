@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -27,7 +28,7 @@ public class AddMarker extends AppCompatActivity {
     private EditText name;
     private EditText desc;
     private Spinner spinner;
-    private Button adds;
+    private ImageButton adds,backs;
 
     //Location
     private Location mCurrentLocation;
@@ -45,6 +46,7 @@ public class AddMarker extends AppCompatActivity {
         desc=findViewById(R.id.desc);
         spinner=findViewById(R.id.spinner2);
         adds=findViewById(R.id.addit);
+        backs=findViewById(R.id.backToIt);
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         fetchLastLocation();
@@ -73,6 +75,15 @@ public class AddMarker extends AppCompatActivity {
                 finish();
             }
         });
+
+        backs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+
 
 
     }

@@ -222,6 +222,22 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 mMap.addMarker(new MarkerOptions().position(m1).title(marker.getName()).icon(BitmapDescriptorFactory.fromResource(R.drawable.lake)).snippet("Description : \n" + marker.getDescription() + "\n\n"
                         + "Catégorie : \t" + marker.getType()));
                 break;
+            case "Montagne":
+                mMap.addMarker(new MarkerOptions().position(m1).title(marker.getName()).icon(BitmapDescriptorFactory.fromResource(R.drawable.mountain)).snippet("Description : \n" + marker.getDescription() + "\n\n"
+                        + "Catégorie : \t" + marker.getType()));
+                break;
+            case "Cascade":
+                mMap.addMarker(new MarkerOptions().position(m1).title(marker.getName()).icon(BitmapDescriptorFactory.fromResource(R.drawable.waterfall)).snippet("Description : \n" + marker.getDescription() + "\n\n"
+                        + "Catégorie : \t" + marker.getType()));
+                break;
+            case "Forêt":
+                mMap.addMarker(new MarkerOptions().position(m1).title(marker.getName()).icon(BitmapDescriptorFactory.fromResource(R.drawable.forest)).snippet("Description : \n" + marker.getDescription() + "\n\n"
+                        + "Catégorie : \t" + marker.getType()));
+                break;
+            case "Mer":
+                mMap.addMarker(new MarkerOptions().position(m1).title(marker.getName()).icon(BitmapDescriptorFactory.fromResource(R.drawable.sea)).snippet("Description : \n" + marker.getDescription() + "\n\n"
+                        + "Catégorie : \t" + marker.getType()));
+                break;
             default:
                 break;
         }

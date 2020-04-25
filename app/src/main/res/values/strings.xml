@@ -9,10 +9,18 @@
         <item>Tous</item>
         <item>Chateau</item>
         <item>Lac</item>
+        <item>Montagne</item>
+        <item>Cascade</item>
+        <item>Forêt</item>
+        <item>Mer</item>
     </string-array>
 
     <string-array name="type2">
         <item>Chateau</item>
         <item>Lac</item>
+        <item>Montagne</item>
+        <item>Cascade</item>
+        <item>Forêt</item>
+        <item>Mer</item>
     </string-array>
 </resources>
