@@ -45,6 +45,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private ImageButton btnType,btnLocation;
     private Spinner spinnerType;
     private Toolbar mToolbar;
+    private TextView textView;
 
     //Location
     Location currentLocation;
@@ -52,6 +53,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     //Markers
     public static List<Marker> allMarkers;
+    String nameit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,12 +64,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         btnLocation = findViewById(R.id.addLocation);
         spinnerType = findViewById(R.id.spinnerType);
         mToolbar = findViewById(R.id.toolbar);
+        textView = findViewById(R.id.tView);
 
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         //Check Permissions
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this,Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},1);
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},1);
@@ -83,6 +86,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             public void DataIsInserted() {
             }
         });
+
+
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -132,9 +137,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         //Selection de la catégorie
         btnType.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
+                nameit="";
                 mMap.clear(); //Reset des markers
                 for (Marker marker : allMarkers){
+                    nameit+=marker.getType()+", "+spinnerType.getSelectedItem().toString()+" : "+marker.getLongitude()+"-"+marker.getLatitude()+"-"+marker.getName();
                     if (marker.getType().equals(spinnerType.getSelectedItem().toString())){ // Vérification du type du marker correspond au choix selectionné
                         displayMarkers(marker);
                     }
@@ -142,6 +149,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                         displayMarkers(marker);
                     }
                 }
+                textView.setText(nameit);
+                //Toast.makeText(MapsActivity.this,nameit,Toast.LENGTH_SHORT).show();
                 getLocation(); //Recentrer sur la localisation après la selection
             }
         });
@@ -149,10 +158,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         //Ajout d'un marker
         btnLocation.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                LatLng newLoc = new LatLng(currentLocation.getLatitude(),currentLocation.getLongitude());
+            public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(),AddMarker.class);
-                i.putExtra("newLoc",newLoc);
+                int val= allMarkers.size()+1;
+                i.putExtra("values",val);
                 startActivity(i);
             }
         });
@@ -178,7 +187,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private void getLocation(){
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         try {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
                     && ActivityCompat.checkSelfPermission(this,Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED){
                 Task location = fusedLocationProviderClient.getLastLocation();
                 location.addOnCompleteListener(new OnCompleteListener() {
@@ -201,9 +210,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     //Affichage pour un marker donné
     private void displayMarkers(Marker marker){
-        mMap.clear();
         LatLng m1 = new LatLng(Double.parseDouble(marker.getLongitude()),Double.parseDouble(marker.getLatitude()));
         //Affichage de l'icone en fonction de son type
+        nameit+=" ; \n";
         switch (marker.getType()){
             case "Chateau":
                 mMap.addMarker(new MarkerOptions().position(m1).title(marker.getName()).icon(BitmapDescriptorFactory.fromResource(R.drawable.castle)).snippet("Description : \n" + marker.getDescription() + "\n\n"

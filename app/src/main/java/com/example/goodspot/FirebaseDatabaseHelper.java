@@ -51,8 +51,8 @@ public class FirebaseDatabaseHelper {
         });
     }
 
-    public void addMarkers(Marker marker, final DataStatus dataStatus){
-        String key = mReference.push().getKey();
+    public void addMarkers(Marker marker,int count, final DataStatus dataStatus){
+        String key = String.valueOf(count);
         mReference.child(key).setValue(marker).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
