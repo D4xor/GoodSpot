@@ -1,4 +1,4 @@
-package com.example.goodspot;
+package com.example.goodspot.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -13,6 +13,9 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 
+import com.example.goodspot.FirebaseDatabaseHelper;
+import com.example.goodspot.Model.Marker;
+import com.example.goodspot.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -20,7 +23,7 @@ import com.google.android.gms.tasks.Task;
 
 import java.util.List;
 
-public class AddMarker extends AppCompatActivity {
+public class AddMarkerActivity extends AppCompatActivity {
 
     //Layout
     private EditText name;

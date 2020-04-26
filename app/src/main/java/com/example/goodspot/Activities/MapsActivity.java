@@ -1,4 +1,4 @@
-package com.example.goodspot;
+package com.example.goodspot.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -23,6 +23,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.goodspot.FirebaseDatabaseHelper;
+import com.example.goodspot.Model.Marker;
+import com.example.goodspot.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -163,7 +166,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         btnLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(),AddMarker.class);
+                Intent i = new Intent(getApplicationContext(), AddMarkerActivity.class);
                 int val= allMarkers.size()+1;
                 i.putExtra("values",val);
                 startActivity(i);
@@ -190,6 +193,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 textView.setText(nameit);
             }
         });
+
+
+
     }
 
     //Option Menu de la ToolBar
@@ -203,10 +209,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         int id = item.getItemId();
         if (id == R.id.quit_but) {
             finish();
-            return true;
-        }
-        if (id == R.id.spot_list){
-
             return true;
         }
         return super.onOptionsItemSelected(item);

@@ -1,4 +1,4 @@
-package com.example.goodspot;
+package com.example.goodspot.Model;
 
 public class Marker {
 

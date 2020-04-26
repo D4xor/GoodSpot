@@ -2,6 +2,7 @@ package com.example.goodspot;
 
 import androidx.annotation.NonNull;
 
+import com.example.goodspot.Model.Marker;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
