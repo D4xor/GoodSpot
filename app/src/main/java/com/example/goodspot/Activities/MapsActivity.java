@@ -173,6 +173,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mMap.clear();
                 int cnt=0;
                 for (Marker marker : allMarkers){
                     if (marker.getName().toLowerCase().contains(searchText.getText().toString().toLowerCase())){ //Verifie si le text écrit dans "searchText" est dans un marker
