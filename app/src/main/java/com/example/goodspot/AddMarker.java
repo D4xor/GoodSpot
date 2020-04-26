@@ -1,22 +1,20 @@
 package com.example.goodspot;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
@@ -29,6 +27,7 @@ public class AddMarker extends AppCompatActivity {
     private EditText desc;
     private Spinner spinner;
     private ImageButton adds,backs;
+    private Toolbar mToolbar;
 
     //Location
     private Location mCurrentLocation;
@@ -47,6 +46,10 @@ public class AddMarker extends AppCompatActivity {
         spinner=findViewById(R.id.spinner2);
         adds=findViewById(R.id.addit);
         backs=findViewById(R.id.backToIt);
+        mToolbar = findViewById(R.id.toolbar);
+
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         fetchLastLocation();
@@ -82,10 +85,21 @@ public class AddMarker extends AppCompatActivity {
                 finish();
             }
         });
+    }
 
-
-
-
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.quit_but) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void fetchLastLocation() {

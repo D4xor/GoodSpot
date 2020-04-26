@@ -1,6 +1,5 @@
 package com.example.goodspot;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
@@ -13,7 +12,6 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.location.Location;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -34,7 +32,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
 import java.util.List;
@@ -69,6 +67,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mToolbar = findViewById(R.id.toolbar);
         textView = findViewById(R.id.tView);
         searchText = findViewById(R.id.search_name);
+
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -105,7 +105,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         //
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this,Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED){
-            getLocation();
+            fetchLastLocation();
             mMap.setMyLocationEnabled(true);
             mMap.getUiSettings().setMyLocationButtonEnabled(true); //Affichage du bouton de localisation de Google Maps
         }
@@ -155,7 +155,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 }
                 //textView.setText(nameit);
                 //Toast.makeText(MapsActivity.this,nameit,Toast.LENGTH_SHORT).show();
-                getLocation(); //Recentrer sur la localisation après la selection
+                fetchLastLocation(); //Recentrer sur la localisation après la selection
             }
         });
 
@@ -185,7 +185,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 if (cnt == 0){
                     Toast.makeText(MapsActivity.this,"Aucun spot trouvé pour la recherche correspondante",Toast.LENGTH_LONG);
                 }else {
-                    getLocation();
+                    fetchLastLocation();
                 }
                 textView.setText(nameit);
             }
@@ -201,36 +201,29 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
+        if (id == R.id.quit_but) {
             finish();
+            return true;
+        }
+        if (id == R.id.spot_list){
+
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    //Obtenir la localisation de l'appareil
-    private void getLocation(){
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-        try {
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-                    && ActivityCompat.checkSelfPermission(this,Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED){
-                Task location = fusedLocationProviderClient.getLastLocation();
-                location.addOnCompleteListener(new OnCompleteListener() {
-                    @Override
-                    public void onComplete(@NonNull Task task) {
-                        if(task.isSuccessful()){
-                            currentLocation = (Location) task.getResult();
-                            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(currentLocation.getLatitude(),currentLocation.getLongitude()),10f));
-                        }
-                        else{
-                            Toast.makeText(MapsActivity.this,"Impossible d'obtenir la localisation",Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+
+    private void fetchLastLocation() {
+        Task<Location> task = fusedLocationProviderClient.getLastLocation();
+        task.addOnSuccessListener(new OnSuccessListener<Location>() {
+            @Override
+            public void onSuccess(Location location) {
+                if (location != null) {
+                    currentLocation = location;
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(currentLocation.getLatitude(),currentLocation.getLongitude()),6f));
+                }
             }
-        }catch (SecurityException e){
-            Log.e("tag","SecurityException");
-        }
+        });
     }
 
     //Affichage pour un marker donné

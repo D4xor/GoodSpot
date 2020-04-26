@@ -4,7 +4,7 @@
     tools:context=".MainActivity">
 
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/quit_but"
         android:title="@string/action_quit"
         android:orderInCategory="100"
         app:showAsAction="never" />
