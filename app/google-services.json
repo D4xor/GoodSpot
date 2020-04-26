@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "791918747770-jvs4vauc986fjo7cfeeiv7lksri0csvj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.goodspot",
+            "certificate_hash": "1c418a79d71018331856ff53e7171f62a732e63a"
+          }
+        },
+        {
           "client_id": "791918747770-o4ti65k9otkuojm2mqh46n0174532dr5.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
