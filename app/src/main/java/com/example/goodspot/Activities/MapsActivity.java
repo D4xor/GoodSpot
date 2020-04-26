@@ -16,6 +16,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -45,9 +46,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     //Layout
     private GoogleMap mMap;
     private ImageButton btnType,btnLocation,btnSearch;
+    private Button goToList;
     private Spinner spinnerType;
     private Toolbar mToolbar;
-    private TextView textView;
     private EditText searchText;
 
     //Location
@@ -66,9 +67,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         btnType = findViewById(R.id.btnType);
         btnLocation = findViewById(R.id.addLocation);
         btnSearch = findViewById(R.id.btnSearch);
+        goToList = findViewById(R.id.listSpot);
         spinnerType = findViewById(R.id.spinnerType);
         mToolbar = findViewById(R.id.toolbar);
-        textView = findViewById(R.id.tView);
         searchText = findViewById(R.id.search_name);
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
@@ -173,14 +174,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
+        //Bouton recherche par nom
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int cnt=0;
-                nameit="";
                 for (Marker marker : allMarkers){
-                    nameit+=marker.getName().toLowerCase().contains(searchText.getText().toString().toLowerCase()) + " - " + marker.getName().toLowerCase() + "/" + searchText.getText().toString().toLowerCase() + "; ";
-                    if (marker.getName().toLowerCase().contains(searchText.getText().toString().toLowerCase())){
+                    if (marker.getName().toLowerCase().contains(searchText.getText().toString().toLowerCase())){ //Verifie si le text écrit dans "searchText" est dans un marker
                         displayMarkers(marker);
                         cnt+=1;
                     }
@@ -190,11 +190,16 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 }else {
                     fetchLastLocation();
                 }
-                textView.setText(nameit);
             }
         });
 
-
+        goToList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), ListActivity.class);
+                startActivity(i);
+            }
+        });
 
     }
 
@@ -215,6 +220,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
 
+    //Obtenir la position
     private void fetchLastLocation() {
         Task<Location> task = fusedLocationProviderClient.getLastLocation();
         task.addOnSuccessListener(new OnSuccessListener<Location>() {
@@ -232,7 +238,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private void displayMarkers(Marker marker){
         LatLng m1 = new LatLng(Double.parseDouble(marker.getLongitude()),Double.parseDouble(marker.getLatitude()));
         //Affichage de l'icone en fonction de son type
-        //nameit+=" ; \n";
         switch (marker.getType()){
             case "Chateau":
                 mMap.addMarker(new MarkerOptions().position(m1).title(marker.getName()).icon(BitmapDescriptorFactory.fromResource(R.drawable.castle)).snippet("Description : \n" + marker.getDescription() + "\n\n"

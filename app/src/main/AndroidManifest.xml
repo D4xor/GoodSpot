@@ -18,6 +18,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/MyMaterialTheme">
+        <activity android:name=".Activities.ListActivity"/>
         <activity android:name=".Activities.AddMarkerActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.

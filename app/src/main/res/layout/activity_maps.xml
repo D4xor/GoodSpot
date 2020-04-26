@@ -132,12 +132,11 @@
         android:layout_height="wrap_content"
         android:padding="5dp"> <!-- to show what the parent is -->
 
-        <TextView
-            android:id="@+id/tView"
+        <Button
+            android:id="@+id/listSpot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="for the test"
-            />
+            android:text="Liste des spots"/>
     </LinearLayout>
     <fragment
         android:id="@+id/map"
