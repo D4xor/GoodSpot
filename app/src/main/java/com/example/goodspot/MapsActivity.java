@@ -18,6 +18,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -42,10 +43,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     //Layout
     private GoogleMap mMap;
-    private ImageButton btnType,btnLocation;
+    private ImageButton btnType,btnLocation,btnSearch;
     private Spinner spinnerType;
     private Toolbar mToolbar;
     private TextView textView;
+    private EditText searchText;
 
     //Location
     Location currentLocation;
@@ -62,9 +64,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         btnType = findViewById(R.id.btnType);
         btnLocation = findViewById(R.id.addLocation);
+        btnSearch = findViewById(R.id.btnSearch);
         spinnerType = findViewById(R.id.spinnerType);
         mToolbar = findViewById(R.id.toolbar);
         textView = findViewById(R.id.tView);
+        searchText = findViewById(R.id.search_name);
 
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -138,10 +142,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         btnType.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                nameit="";
+                //nameit="";
                 mMap.clear(); //Reset des markers
                 for (Marker marker : allMarkers){
-                    nameit+=marker.getType()+", "+spinnerType.getSelectedItem().toString()+" : "+marker.getLongitude()+"-"+marker.getLatitude()+"-"+marker.getName();
+                    //nameit+=marker.getType()+", "+spinnerType.getSelectedItem().toString()+" : "+marker.getLongitude()+"-"+marker.getLatitude()+"-"+marker.getName();
                     if (marker.getType().equals(spinnerType.getSelectedItem().toString())){ // Vérification du type du marker correspond au choix selectionné
                         displayMarkers(marker);
                     }
@@ -149,7 +153,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                         displayMarkers(marker);
                     }
                 }
-                textView.setText(nameit);
+                //textView.setText(nameit);
                 //Toast.makeText(MapsActivity.this,nameit,Toast.LENGTH_SHORT).show();
                 getLocation(); //Recentrer sur la localisation après la selection
             }
@@ -163,6 +167,27 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 int val= allMarkers.size()+1;
                 i.putExtra("values",val);
                 startActivity(i);
+            }
+        });
+
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int cnt=0;
+                nameit="";
+                for (Marker marker : allMarkers){
+                    nameit+=marker.getName().toLowerCase().contains(searchText.getText().toString().toLowerCase()) + " - " + marker.getName().toLowerCase() + "/" + searchText.getText().toString().toLowerCase() + "; ";
+                    if (marker.getName().toLowerCase().contains(searchText.getText().toString().toLowerCase())){
+                        displayMarkers(marker);
+                        cnt+=1;
+                    }
+                }
+                if (cnt == 0){
+                    Toast.makeText(MapsActivity.this,"Aucun spot trouvé pour la recherche correspondante",Toast.LENGTH_LONG);
+                }else {
+                    getLocation();
+                }
+                textView.setText(nameit);
             }
         });
     }
@@ -212,7 +237,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private void displayMarkers(Marker marker){
         LatLng m1 = new LatLng(Double.parseDouble(marker.getLongitude()),Double.parseDouble(marker.getLatitude()));
         //Affichage de l'icone en fonction de son type
-        nameit+=" ; \n";
+        //nameit+=" ; \n";
         switch (marker.getType()){
             case "Chateau":
                 mMap.addMarker(new MarkerOptions().position(m1).title(marker.getName()).icon(BitmapDescriptorFactory.fromResource(R.drawable.castle)).snippet("Description : \n" + marker.getDescription() + "\n\n"
