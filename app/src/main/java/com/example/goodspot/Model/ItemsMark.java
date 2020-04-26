@@ -1,5 +1,6 @@
 package com.example.goodspot.Model;
 
+//Class pour le recyclerView - Layout
 public class ItemsMark {
     private String name;
     private String desc;

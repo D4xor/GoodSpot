@@ -29,8 +29,10 @@ public class ListActivity extends AppCompatActivity {
 
         mToolbar = findViewById(R.id.toolbar);
 
+        //Affichage de la toolbar
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
 
         itemsMarks = new ArrayList<>();
         for (Marker marker : MapsActivity.allMarkers){
@@ -63,7 +65,6 @@ public class ListActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         adapter = new ListAdapter(itemsMarks);
-
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
     }

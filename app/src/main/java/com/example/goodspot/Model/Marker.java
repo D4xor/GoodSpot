@@ -1,5 +1,7 @@
 package com.example.goodspot.Model;
 
+
+//Class pour chaque marqueurs à afficher sur la map
 public class Marker {
 
     private String name;

@@ -42,7 +42,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
     @Override
     public void onBindViewHolder(@NonNull ListViewHolder holder, int position) {
         ItemsMark itemsMark = itemsMarkArrayList.get(position);
-
         holder.iv.setImageResource(itemsMark.getImage());
         holder.nam.setText(itemsMark.getName());
         holder.desc.setText(itemsMark.getDesc());

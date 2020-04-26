@@ -119,8 +119,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             public View getInfoWindow(com.google.android.gms.maps.model.Marker arg0) {
                 return null;
             }
-
-            @Override
+            @Override //Paramétrage du snippet des marqueurs (design)
             public View getInfoContents(com.google.android.gms.maps.model.Marker marker) {
                 LinearLayout info = new LinearLayout(MapsActivity.this);
                 info.setOrientation(LinearLayout.VERTICAL);
@@ -146,10 +145,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         btnType.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //nameit="";
                 mMap.clear(); //Reset des markers
                 for (Marker marker : allMarkers){
-                    //nameit+=marker.getType()+", "+spinnerType.getSelectedItem().toString()+" : "+marker.getLongitude()+"-"+marker.getLatitude()+"-"+marker.getName();
                     if (marker.getType().equals(spinnerType.getSelectedItem().toString())){ // Vérification du type du marker correspond au choix selectionné
                         displayMarkers(marker);
                     }
@@ -157,8 +154,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                         displayMarkers(marker);
                     }
                 }
-                //textView.setText(nameit);
-                //Toast.makeText(MapsActivity.this,nameit,Toast.LENGTH_SHORT).show();
                 fetchLastLocation(); //Recentrer sur la localisation après la selection
             }
         });
@@ -193,6 +188,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
+        //Bouton pour accéder à la liste des spots
         goToList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

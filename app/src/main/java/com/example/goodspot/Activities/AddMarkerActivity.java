@@ -36,8 +36,6 @@ public class AddMarkerActivity extends AppCompatActivity {
     private Location mCurrentLocation;
     private FusedLocationProviderClient fusedLocationProviderClient;
 
-    Marker mark;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,13 +49,14 @@ public class AddMarkerActivity extends AppCompatActivity {
         backs=findViewById(R.id.backToIt);
         mToolbar = findViewById(R.id.toolbar);
 
+        //Affichage Toolbar
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         fetchLastLocation();
 
-
+        //Ajout du marker - Envoie à la base de donnée
         adds.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,6 +81,7 @@ public class AddMarkerActivity extends AppCompatActivity {
             }
         });
 
+        //Bouton de retour à la "MainActivity"
         backs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
