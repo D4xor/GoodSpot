@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.example.goodspot.ListAdapter;
 import com.example.goodspot.Model.ItemsMark;
@@ -67,5 +69,20 @@ public class ListActivity extends AppCompatActivity {
         adapter = new ListAdapter(itemsMarks);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.quit_but) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
