@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.goodspot.FirebaseDatabaseHelper;
 import com.example.goodspot.Model.Marker;
@@ -49,6 +50,7 @@ public class AddMarkerActivity extends AppCompatActivity {
         backs=findViewById(R.id.backToIt);
         mToolbar = findViewById(R.id.toolbar);
 
+
         //Affichage Toolbar
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -56,28 +58,38 @@ public class AddMarkerActivity extends AppCompatActivity {
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         fetchLastLocation();
 
+
         //Ajout du marker - Envoie à la base de donnée
         adds.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Marker mk = new Marker();
-                mk.setName(name.getText().toString());
-                mk.setDescription(desc.getText().toString());
-                mk.setType(spinner.getSelectedItem().toString());
-                mk.setLongitude(String.valueOf(mCurrentLocation.getLatitude()));
-                mk.setLatitude(String.valueOf(mCurrentLocation.getLongitude()));
-                mk.setPhotolink("unknown");
-                Intent i = getIntent();
-                int count = i.getIntExtra("values",0);
-                new FirebaseDatabaseHelper().addMarkers(mk,count,new FirebaseDatabaseHelper.DataStatus() {
-                    @Override
-                    public void DataIsLoaded(List<Marker> markers, List<String> keys) {
-                    }
-                    @Override
-                    public void DataIsInserted() {
-                    }
-                });
-                finish();
+                if(!name.getText().toString().equals("") && !desc.getText().toString().equals("")){
+                    Marker mk = new Marker();
+                    mk.setName(name.getText().toString());
+                    mk.setDescription(desc.getText().toString());
+                    mk.setType(spinner.getSelectedItem().toString());
+                    mk.setLongitude(String.valueOf(mCurrentLocation.getLatitude()));
+                    mk.setLatitude(String.valueOf(mCurrentLocation.getLongitude()));
+                    mk.setPhotolink("Unknown");
+                    Intent i = getIntent();
+                    int count = i.getIntExtra("values",0);
+                    new FirebaseDatabaseHelper().addMarkers(mk,count,new FirebaseDatabaseHelper.DataStatus() {
+                        @Override
+                        public void DataIsLoaded(List<Marker> markers, List<String> keys) {
+                        }
+                        @Override
+                        public void DataIsInserted() {
+                        }
+                    });
+                    finish();
+                }else if (name.getText().toString().equals("") && desc.getText().toString().equals("")){
+                    Toast.makeText(AddMarkerActivity.this,"Champ \"nom\" et \"description\"  sont vides, veuillez les remplir ",Toast.LENGTH_LONG).show();
+                }else if(name.getText().toString().equals("")){
+                    Toast.makeText(AddMarkerActivity.this,"Champ \"nom\" est vide, veuillez le remplir ",Toast.LENGTH_LONG).show();
+                }else if(desc.getText().toString().equals("")){
+                    Toast.makeText(AddMarkerActivity.this,"Champ \"description\" est vide, veuillez le remplir ",Toast.LENGTH_LONG).show();
+                }
+
             }
         });
 
@@ -88,6 +100,8 @@ public class AddMarkerActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+
     }
 
     @Override
@@ -116,5 +130,4 @@ public class AddMarkerActivity extends AppCompatActivity {
             }
         });
     }
-
 }

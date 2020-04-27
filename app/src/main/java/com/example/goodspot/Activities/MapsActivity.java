@@ -57,7 +57,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     //Markers
     public static List<Marker> allMarkers;
-    String nameit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -177,13 +176,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 mMap.clear();
                 int cnt=0;
                 for (Marker marker : allMarkers){
-                    if (marker.getName().toLowerCase().contains(searchText.getText().toString().toLowerCase())){ //Verifie si le text écrit dans "searchText" est dans un marker
+                    if (marker.getName().toLowerCase().contains(searchText.getText().toString().toLowerCase()) && !searchText.getText().toString().toLowerCase().equals("")){ //Verifie si le text écrit dans "searchText" est dans un marker
                         displayMarkers(marker);
                         cnt+=1;
                     }
                 }
                 if (cnt == 0){
-                    Toast.makeText(MapsActivity.this,"Aucun spot trouvé pour la recherche correspondante",Toast.LENGTH_LONG);
+                    Toast.makeText(MapsActivity.this,"Aucun spot trouvé pour la recherche correspondante",Toast.LENGTH_LONG).show();
                 }else {
                     fetchLastLocation();
                 }
