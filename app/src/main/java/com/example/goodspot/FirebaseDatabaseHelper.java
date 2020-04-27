@@ -44,10 +44,8 @@ public class FirebaseDatabaseHelper {
                 }
                 dataStatus.DataIsLoaded(markers,keys);
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
     }

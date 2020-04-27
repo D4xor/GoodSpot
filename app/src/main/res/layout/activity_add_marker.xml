@@ -9,31 +9,50 @@
         android:id="@+id/toolbar"
         layout="@layout/toolbar" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nom"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        />
+
     <EditText
         android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Nom"
         android:inputType="textPersonName"
         android:textAlignment="center" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Description"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        />
 
     <EditText
         android:id="@+id/desc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Description"
-        android:inputType="textPersonName"
-        android:textAlignment="center" />
+        android:inputType="textPersonName" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Catégorie"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        />
 
     <Spinner
         android:id="@+id/spinner2"
         android:layout_width="match_parent"
         android:layout_height="42dp"
         android:entries="@array/type2"
-        android:textAlignment="center"
         />
 
     <LinearLayout

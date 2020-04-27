@@ -74,6 +74,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
+        //Afficher la toolbar
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
@@ -106,7 +107,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        //
+        //Verifier une deuxième fois la géolocalisation
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this,Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED){
             fetchLastLocation();
