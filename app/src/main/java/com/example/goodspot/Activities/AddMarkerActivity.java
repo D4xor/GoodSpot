@@ -99,11 +99,6 @@ public class AddMarkerActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(!name.getText().toString().equals("") && !desc.getText().toString().equals("")){
-                    mk.setName(name.getText().toString());
-                    mk.setDescription(desc.getText().toString());
-                    mk.setType(spinner.getSelectedItem().toString());
-                    mk.setLongitude(String.valueOf(mCurrentLocation.getLatitude()));
-                    mk.setLatitude(String.valueOf(mCurrentLocation.getLongitude()));
                     Intent i = getIntent();
                     count = i.getIntExtra("values",0);
                     uploadFile();
@@ -192,6 +187,11 @@ public class AddMarkerActivity extends AppCompatActivity {
                             @Override
                             public void onSuccess(Uri uri) {
                                 uriUrl = uri.toString();
+                                mk.setName(name.getText().toString());
+                                mk.setDescription(desc.getText().toString());
+                                mk.setType(spinner.getSelectedItem().toString());
+                                mk.setLongitude(String.valueOf(mCurrentLocation.getLatitude()));
+                                mk.setLatitude(String.valueOf(mCurrentLocation.getLongitude()));
                                 mk.setPhotolink(uriUrl+".jpg");
                                 //Ajout de l'objet Marker
                                 new FirebaseDatabaseHelper().addMarkers(mk,count,new FirebaseDatabaseHelper.DataStatus() {
