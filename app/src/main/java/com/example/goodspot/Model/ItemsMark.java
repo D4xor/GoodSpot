@@ -5,13 +5,15 @@ public class ItemsMark {
     private String name;
     private String desc;
     private String type;
+    private String link;
     private int image;
 
-    public ItemsMark(String name, String desc, String type, int image) {
+    public ItemsMark(String name, String desc, String type, String link, int ima) {
         this.name = name;
         this.desc = desc;
         this.type = type;
-        this.image = image;
+        this.link = link;
+        this.image = ima;
     }
 
     public String getName() {
@@ -36,6 +38,13 @@ public class ItemsMark {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getLink() {
+        return link;
+    }
+    public void setLink(String link) {
+        this.link = link;
     }
 
     public int getImage() {

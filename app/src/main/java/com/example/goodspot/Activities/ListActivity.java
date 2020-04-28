@@ -38,25 +38,26 @@ public class ListActivity extends AppCompatActivity {
 
         itemsMarks = new ArrayList<>();
         for (Marker marker : MapsActivity.allMarkers){
+            //itemsMarks.add(new ItemsMark(marker.getName(),marker.getDescription(),marker.getType(),marker.getPhotolink()));
             String type = marker.getType();
             switch (type){
                 case "Chateau":
-                    itemsMarks.add(new ItemsMark(marker.getName(),marker.getDescription(),marker.getType(),R.drawable.castle));
+                    itemsMarks.add(new ItemsMark(marker.getName(),marker.getDescription(),marker.getType(),marker.getPhotolink(),R.drawable.castle));
                     break;
                 case "Lac":
-                    itemsMarks.add(new ItemsMark(marker.getName(),marker.getDescription(),marker.getType(),R.drawable.lake));
+                    itemsMarks.add(new ItemsMark(marker.getName(),marker.getDescription(),marker.getType(),marker.getPhotolink(),R.drawable.lake));
                     break;
                 case "Montagne":
-                    itemsMarks.add(new ItemsMark(marker.getName(),marker.getDescription(),marker.getType(),R.drawable.mountain));
+                    itemsMarks.add(new ItemsMark(marker.getName(),marker.getDescription(),marker.getType(),marker.getPhotolink(),R.drawable.mountain));
                     break;
                 case "Cascade":
-                    itemsMarks.add(new ItemsMark(marker.getName(),marker.getDescription(),marker.getType(),R.drawable.waterfall));
+                    itemsMarks.add(new ItemsMark(marker.getName(),marker.getDescription(),marker.getType(),marker.getPhotolink(),R.drawable.waterfall));
                     break;
                 case "Forêt":
-                    itemsMarks.add(new ItemsMark(marker.getName(),marker.getDescription(),marker.getType(),R.drawable.forest));
+                    itemsMarks.add(new ItemsMark(marker.getName(),marker.getDescription(),marker.getType(),marker.getPhotolink(),R.drawable.forest));
                     break;
                 case "Mer":
-                    itemsMarks.add(new ItemsMark(marker.getName(),marker.getDescription(),marker.getType(),R.drawable.sea));
+                    itemsMarks.add(new ItemsMark(marker.getName(),marker.getDescription(),marker.getType(),marker.getPhotolink(),R.drawable.sea));
                     break;
                 default:
                     break;

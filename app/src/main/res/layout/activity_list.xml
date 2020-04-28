@@ -4,20 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/darker_gray"
+    android:background="@color/colorAccent"
     tools:context=".Activities.ListActivity">
 
     <include
         android:id="@+id/toolbar"
         layout="@layout/toolbar" />
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycle"
-        android:layout_width="409dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
+        android:layout_marginHorizontal="2dp"
         android:layout_marginTop="1dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="1dp"
         android:scrollbars="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
