@@ -173,7 +173,6 @@ public class AddMarkerActivity extends AppCompatActivity {
         return mime.getExtensionFromMimeType(cR.getType(tUri));
     }
 
-
     //Upload le fichier sur Firebase Storage + Upload dans FirebaseStorage
     private void uploadFile(){
         if(contentUri != null){
