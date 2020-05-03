@@ -63,7 +63,6 @@ public class ListActivity extends AppCompatActivity {
                     break;
             }
         }
-
         recyclerView = findViewById(R.id.recycle);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
